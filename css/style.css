@@ -1,0 +1,51 @@
+body {
+}
+
+h3 {
+    font-size: 10pt !important;
+}
+
+li {
+    padding-bottom: 7px;
+}
+
+#main {
+    margin-top: 10px;
+    width: 800px;
+    
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+#startbutton {
+    visibility: hidden;
+}
+
+#summaries {
+    font-size: 10pt;
+    list-style-type: none;
+}
+
+.ui-accordion .ui-accordion-content {
+    padding: 0px;
+}
+
+.ui-state-default {
+    color: black;
+}
+
+.ui-spinner-input {
+    width: 70px;
+    margin: 0px;
+    margin-right: 0px;
+    margin-left: 4px;
+}
+
+#radio {
+    margin-top: 4px;
+}
+
+#side {
+    float: right;
+}

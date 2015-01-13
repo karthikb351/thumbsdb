@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+        <script src="js/data.js"></script>
+        <script src="js/tools.js"></script>
+        <script src="js/load.js"></script>
+        <script src="https://apis.google.com/js/client.js?onload=init"></script>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+<title>ThumbsDB</title>
+<body>
+<div id="main">
+    <div id="side">
+        Podcast by:</br>
+        <a href="https://www.idlethumbs.net/"><img src="img/thumbs.jpg" style="width:128px;height:128px"></a></br>
+        </br>
+        This handsome site </br>
+        is brought you by </br>
+        <b>Joel Schroyen</b></br>
+        (<a href="https://twitter.com/thenzguy">@thenzguy</a>)</br>
+    </div>
+    <div id="title">
+        <h1>Thumbs db</h1>
+        <p>Loads all Idle Thumbs youtube videos and scrapes timecode data then displays it sorted below.
+    </div>
+    <div id="dates">
+       <p><b>Select range</b></br>
+        From: <input type="text" id="datepickerfrom"> To: <input type="text" id="datepickerto"></p>
+    </div>
+    <div id="options">
+        <label for="spinner"><b>Max results:</b></label><input id="spinner" name="value">
+        <form id="radioform">
+            <div id="radio">
+                <b>Sort by:</b>
+                <input type="radio" id="radio1" name="radio" value="duration" checked="checked"><label for="radio1">Total duration</label>
+                <input type="radio" id="radio2" name="radio" value="alpha"><label for="radio2">Alphabetically</label>
+            </div>
+        </form>
+    </div>
+    <div id="startbutton">Go</div>
+    <div id="progressbar"></div>
+    <div id="topics"></div>
+</div>
+</body>
+</html>
