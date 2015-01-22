@@ -1,0 +1,76 @@
+.tdb-full-height {
+	min-height: 100%;
+	padding: 20px;
+	overflow: hidden;
+	border-right: 1px solid #ddd;
+}
+
+#main-content {
+	margin-top: 50px;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 40px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 40px;
+  padding-top: 10px;
+  background-color: #f5f5f5;
+}
+
+.content {	
+    padding: 1.00em;
+}
+
+#tdb-nav {
+    width:250px;
+    height: 100%;
+    border-right: 1px solid #ddd;
+}
+
+#tdb-results {
+    margin-left: 250px;
+    width:400px;
+    height: 100%;
+    border-right: 1px solid #ddd;
+}	
+
+#tdb-details {
+	margin-left: 650px;
+    overflow: auto;
+    width: auto;
+}
+
+#left {
+  background-color: #FC6E51;
+  text-align: center;
+  height:100%;
+}
+
+#right {
+  height:100%;
+  background-color: #4FC1E9;
+  text-align: center;
+}
+
+.loading-overlay {
+    position: absolute;
+    margin-top: -40px;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: #000;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
