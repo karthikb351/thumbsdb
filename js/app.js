@@ -107,7 +107,9 @@ function onPlayerStateChange(newState) {
 
 
 function init() {
-    var apiKey = 'AIzaSyDLMAhvP1smHaSJ_iwjLEEgXqqNhhQkVok';
+
+    var apiKey = 'AIzaSyA2_YxzzRqoJ6xcZXg6VNoY992-trQdhzI'; //github pages
+    //var apiKey = 'AIzaSyDLMAhvP1smHaSJ_iwjLEEgXqqNhhQkVok'; //localhost
     gapi.client.setApiKey(apiKey);      
     gapi.client.load('youtube', 'v3').then(function() { 
         console.log('youtube api loaded.'); 
