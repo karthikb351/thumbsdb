@@ -33,7 +33,7 @@ app.controller('mController',['$scope', '$window', function($scope, $window) {
 
     $scope.prettyTime = function(a,c,e){d=60;s=[" s"," m"," h"]; return t=[a,(0|a/d)*d,(0|a/d/d)*d*d].map(function(a,b,f){p=(a-(0|f[b+1]))/Math.pow(d,b);return e&&1>b?"":c&&!p?"":p+s[b]+". "}).reverse().join("")};
 
-    var nextVideo = function() {
+    $scope.nextVideo = function() {
         if($scope.playStack.length) {
             summary = $scope.playStack.pop();
             $scope.activeSummary = summary;
@@ -56,18 +56,9 @@ app.controller('mController',['$scope', '$window', function($scope, $window) {
                 $scope.playStack = [];
                 for(var i = 0; i< topic.summaries.length ; i++)
                     $scope.playStack.push(topic.summaries[i]);
-                player.addEventListener('onStateChange', playStateChange);
-                nextVideo($scope);
+                $scope.nextVideo();
             }
         }
-
-    var playStateChange = function(newState) {
-        if(newState.data === YT.PlayerState.ENDED)
-        {
-            console.log("Next Video");
-            nextVideo();
-        }
-    }
 
     $window.initGapi = function() {
         fetchVideos($scope);
@@ -91,7 +82,8 @@ player = new YT.Player('tdb-player', {
   height: '250px',
   width: '370px',
   events: {
-    'onReady': onPlayerReady
+    'onReady': onPlayerReady,
+    'onStateChange' : onPlayerStateChange
   }
 });
 }
@@ -102,7 +94,13 @@ function onPlayerReady(event) {
 }
 
 function onPlayerStateChange(newState) {
-    window.playStateChange(newState);
+    if(newState.data === YT.PlayerState.ENDED) {
+        console.log("Next Video");
+        var scope = angular.element($("body")).scope();
+        scope.$apply(function(){
+            scope.nextVideo();
+        });
+    }
 }
 
 

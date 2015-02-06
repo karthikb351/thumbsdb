@@ -74,3 +74,14 @@ body {
     opacity: 0.8;
     filter: alpha(opacity=80);
 }
+.center {
+    position: absolute;
+    width: 300px;
+    height: 100px;
+    top: 50%;
+    left: 50%;
+    margin-left: -150px; /* margin is -0.5 * dimension */
+    margin-top: -50px;
+    font-size: 50px;
+    color: #FFFFFF;
+}​

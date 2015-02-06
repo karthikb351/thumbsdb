@@ -10,96 +10,94 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.1/cosmo/bootstrap.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/app.css">
-    </head>
-    <body ng-app="tdb-app" ng-controller="mController">
-        <!-- Fixed navbar -->
-        <nav class="navbar navbar-default navbar-fixed-top">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#">ThumbsDB</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-              <form class="navbar-form navbar-left" role="search">
-                    <div class="input-group">
-                        <span class="input-group-addon" id="tdb-from-date">From</span>
-                        <input type="date" class="form-control" value="2014-01-01" aria-describedby="tdb-from-date" ng-model="fromDate">
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="tdb-to-date">To</span>
-                        <input type="date" class="form-control" value="2015-01-01" aria-describedby="tdb-to-date" ng-model="toDate">
-                    </div>
-                    <input class="btn" type="button" ng-click="getTopics()" value="Search">
-              </form>
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
-          </div>
-        </nav>
-        <div id="main-content" class="container">
-            <div class="row">
-                <div class="tdb-full-height col-md-4">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="tdb-results-filter" placeholder="filter results" ng-model="resultsFilter">
-                        </div>
-                    </form>
-                    <table class="table table-hover">
-                        <tr>
-                            <th>Title</th>
-                            <th>Duration</th>
-                            <th><i class="fa fa-youtube-play"></i></th>
-                        </tr>
-                        <tr class="{{ activeTopic === topic ? 'info' : '' }}" ng-repeat="topic in topics | filter: resultsFilter | orderBy: '-totalDuration'">
-                            <td>{{ topic.topic }}</td>
-                            <td>{{ prettyTime(topic.totalDuration, true, false) }}</td>
-                            <td><a href="#" ng-click="playSummaries(topic)"><i class="fa fa-youtube-play"></i></a></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="tdb-full-height col-md-8">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div id="tdb-player"></div>
-                        </div>
-                        <div class="col-md-6">
-                            <h4>{{ activeSummary.summary }}</h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <h2>{{ activeTopic.topic }}</h2>
-                        <table class="table table-hover">
-                            <tr>
-                                <th>#</th>
-                                <th>Episode</th>
-                                <th>Duration</th>
-                                <th><i class="fa fa-youtube-play"></i></th>
-                            </tr>
-                            <tr class="{{ activeSummary === summary ? 'info' : '' }}" ng-repeat="summary in activeTopic.summaries">
-                                <td>{{ summary.episode }}</td>
-                                <td>{{ summary.summary }}</td>
-                                <td>{{ summary.duration }}</td>
-                                <td><i class="fa fa-youtube-play"></i></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
+</head>
+<body ng-app="tdb-app" ng-controller="mController">
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">ThumbsDB</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <form class="navbar-form navbar-left" role="search">
+        <div class="input-group">
+            <span class="input-group-addon" id="tdb-from-date">From</span>
+            <input type="date" class="form-control" value="2014-01-01" aria-describedby="tdb-from-date" ng-model="fromDate">
         </div>
-        <footer class="footer">
-            <div class="container">
-                <p class="text-muted">Made with <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> by <a href="http://twitter.com/thenzguy">@thenzguy</a> and <a href="http://twitter.com/karthikb351">@karthikb351</a></p>
+        <div class="input-group">
+            <span class="input-group-addon" id="tdb-to-date">To</span>
+            <input type="date" class="form-control" value="2015-01-01" aria-describedby="tdb-to-date" ng-model="toDate">
+        </div>
+        <input class="btn" type="button" ng-click="getTopics()" value="Search">
+    </form>
+</div><!--/.nav-collapse -->
+</div>
+</nav>
+<div id="main-content" class="container">
+    <div class="row">
+        <div class="tdb-full-height col-md-4">
+            <h4>List of Idle Thumbs Topics</h4>
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="tdb-results-filter" placeholder="Filter Results" ng-model="resultsFilter">
+                </div>
+            </form>
+            <table class="table table-hover">
+                <tr>
+                    <th>Title</th>
+                    <th>Duration</th>
+                    <th><i class="fa fa-youtube-play"></i></th>
+                </tr>
+                <tr class="{{ activeTopic === topic ? 'info' : '' }}" ng-repeat="topic in topics | filter: resultsFilter | orderBy: '-totalDuration'">
+                    <td>{{ topic.topic }}</td>
+                    <td>{{ prettyTime(topic.totalDuration, true, false) }}</td>
+                    <td><a href="#" ng-click="playSummaries(topic)"><i class="fa fa-youtube-play"></i></a></td>
+                </tr>
+            </table>
+        </div>
+        <div class="tdb-full-height col-md-8">
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="tdb-player"></div>
+                </div>
+                <div class="col-md-6" ng-show="activeSummary">
+                    <h3 ng-show="activeSummary.episode">Episode: #{{ activeSummary.episode }}</h3>
+                    <h4>{{ activeSummary.summary }}</h4>
+                    <h5>Duration: {{ prettyTime(activeSummary.duration, true, false) }}</h5>
+                </div>
             </div>
-        </footer>
+            <div class="row">
+                <h2>{{ activeTopic.topic }}</h2>
+                <table class="table table-hover">
+                    <tr>
+                        <th>#</th>
+                        <th>Episode</th>
+                        <th>Duration</th>
+                        <th><i class="fa fa-youtube-play"></i></th>
+                    </tr>
+                    <tr class="{{ activeSummary === summary ? 'info' : '' }}" ng-repeat="summary in activeTopic.summaries">
+                        <td>{{ summary.episode }}</td>
+                        <td>{{ summary.summary }}</td>
+                        <td>{{ prettyTime(summary.duration, true, false) }}</td>
+                        <td><i class="fa fa-youtube-play"></i></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">Made with <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> by <a href="http://twitter.com/thenzguy">@thenzguy</a> and <a href="http://twitter.com/karthikb351">@karthikb351</a></p>
+    </div>
+</footer>
 <!-- 
         <div class="root">
             <div id="tdb-nav" class="tdb-full-height">
@@ -147,7 +145,11 @@
                 </div>  
             </div>
         </div> -->
-        <div class="loading-overlay" ng-show="fetchingVideos"></div>
+        <div class="loading-overlay" ng-show="fetchingVideos">
+            <div class='fullscreenDiv'>
+            <div class="center">Loading Data</div>
+            </div>​
+        </div>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
         <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.10/angular.js"></script>
