@@ -1,6 +1,6 @@
+
 import json
 import re
-import IPython
 
 
 class IdleVideo(object):
@@ -51,6 +51,10 @@ def process_video_data(item):
   title = " - ".join(titleParts[1:])
 
   episode = titleParts[0][12:]
+
+  timecode_lines = re.search(r"\d\d:\d\d.*", item['snippet']['description'], flags=re.DOTALL).group(0).split("\n")
+
+  print timecode_lines
 
   lines = item['snippet']['description'].split("\n")
 
@@ -110,24 +114,26 @@ def process_video_data(item):
 
         tcDuration = 0
 
-        timecodes.append(IdleTimecode(type, startTime, title, duration=tcDuration))
+        timecodes.append(IdleTimecode(type=type, startTime=startTime, title=title, duration=tcDuration))
     except Exception as e:
       print e
       print ">>ooops in "+item['snippet']['title']+"\n "+line
 
+  if len(timecodes) == 0:
+      return None
   timecodes[len(timecodes)-1].duration = duration - timecodes[len(timecodes)-1].startTime
 
   for timecode in timecodes:
     print timecode
   videoId = item['snippet']['resourceId']['videoId']
-
-  return True
-  # return IdleVideo(title, episode, description, videoId, 0, duration, timecodes)
+  return IdleVideo(title=title, episode=episode, description=description, videoId=videoId, date=0, duration=duration, timecodes=timecodes)
 
 
 if __name__ == "__main__":
   with open('data.json', 'r') as f:
     data = json.load(f)
     for item in data:
-      if (process_video_data(item) is not None):
-        break
+        if process_video_data(item) is not None:
+            break
+    # videos = [process_video_data(item) for item in data]
+    # len(videos)

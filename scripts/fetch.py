@@ -36,7 +36,12 @@ def fetch_all_youtube_videos(playlistId):
         maxResults="50",
         pageToken=nextPageToken
         ).execute()
-        res['items'] = res['items'] + nextPage['items']
+
+        videoItems = youtube.videos().list(
+            part="snippet,contentDetails",
+            id=",".join([item['snippet']['resourceId']['videoId'] for item in nextPage['items']])
+        ).execute()
+        res['items'] = res['items'] + videoItems['items']
 
         if 'nextPageToken' not in nextPage:
             res.pop('nextPageToken', None)
@@ -47,7 +52,7 @@ def fetch_all_youtube_videos(playlistId):
 
 
 if __name__ == '__main__':
-  videos = fetch_all_youtube_videos("UUe1HeEEIHtXIqkGn0Bu0wRg")
+  videos = fetch_all_youtube_videos("PLC6A6E798515CCFE0")
   print len(videos['items'])
   with open('data.json', 'w') as f:
      json.dump(videos['items'], f)
